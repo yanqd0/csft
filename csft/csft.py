@@ -78,8 +78,8 @@ def _generate_type_data_from(data):
 
 
 def _sort_by_size(data):
-    data = data.sort_values(Column.SIZE, ascending=False)
-    return data.reset_index()
+    sorted_data = data.sort_values(Column.SIZE, ascending=False)
+    return sorted_data.reset_index(drop=True)
 
 
 def print_result(path):
