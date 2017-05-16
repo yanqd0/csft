@@ -26,12 +26,12 @@ if ver < '3.5':
 
 setup(
     name=csft.__name__,
-    description=csft.__doc__,
     version=csft.__version__,
-    author=csft.__author__,
-    license=csft.__license__,
-    author_email=csft.__email__,
+    description='Count Sizes of File Types',
     url=csft.__url__,
+    author=csft.__author__,
+    author_email=csft.__email__,
+    license=csft.__license__,
     packages=find_packages(),
     entry_points={
         'console_scripts': (
