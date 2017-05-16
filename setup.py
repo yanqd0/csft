@@ -12,10 +12,12 @@ import csft
 requires = [
     'argparse >= 1.2.1',
     'pandas >= 0.20.1',
-    'pathlib >= 1.0.1',
 ]
 
-if sys.version <= '3.5':
+if sys.version < '3.4':
+    requires.append('pathlib >= 1.0.1')
+
+if sys.version < '3.5':
     requires.append('scandir >= 1.5')
 
 setup(
