@@ -11,7 +11,7 @@ from os.path import split, splitext
 from pandas import DataFrame, Series
 from pathlib import Path
 
-if sys.version <= '3.5':
+if sys.version < '3.5':
     from scandir import walk
 else:
     from os import walk
