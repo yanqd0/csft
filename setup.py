@@ -3,9 +3,20 @@
 
 """ Setup script for csft """
 
+import sys
+
 from setuptools import find_packages, setup
 
 import csft
+
+requires = [
+    'argparse >= 1.2.1',
+    'pandas >= 0.20.1',
+    'pathlib >= 1.0.1',
+]
+
+if sys.version <= '3.5':
+    requires.append('scandir >= 1.5')
 
 setup(
     name=csft.__name__,
@@ -21,9 +32,5 @@ setup(
             'csft = csft.__main__:main',
         ),
     },
-    install_requires=(
-        'argparse>=1.2.1',
-        'pandas>=0.20.1',
-        'numpy>=1.12.1',
-    ),
+    install_requires=requires,
 )

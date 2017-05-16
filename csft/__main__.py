@@ -13,11 +13,11 @@ from .csft import print_result
 
 def main():
     parser = ap.ArgumentParser(add_help='add help')
-    parser.add_argument('location', help='the directory to be analyzed')
+    parser.add_argument('path', help='the directory to be analyzed')
     args = parser.parse_args()
-    if not isdir(args.location):
-        raise TypeError('%s is not a directory!', args.location)
-    return print_result(args.location)
+    if not isdir(args.path):
+        raise TypeError('%s is not a directory!', args.path)
+    return print_result(args.path)
 
 
 if __name__ == '__main__':
