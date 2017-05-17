@@ -51,13 +51,6 @@ def _generate_raw_data_from(paths):
     return data
 
 
-def _add_type_to(data):
-    types = set()
-    for file_type in data['type']:
-        types.add(file_type)
-    return data, types
-
-
 def _type_size_sum(data, types):
     sizes = []
     for file_type in types:
