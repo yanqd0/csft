@@ -16,3 +16,6 @@ def test_main():
 
     with raises(SystemExit):
         main.main(argv=[])
+
+    with raises(TypeError):
+        main.main(argv=['path/is/not/a/directory'])
