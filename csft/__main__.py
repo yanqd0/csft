@@ -11,10 +11,10 @@ from os.path import isdir
 from .csft import print_result
 
 
-def main():
+def main(argv=None):
     parser = ap.ArgumentParser(add_help='add help')
     parser.add_argument('path', help='the directory to be analyzed')
-    args = parser.parse_args()
+    args = parser.parse_args(args=argv)
     if not isdir(args.path):
         raise TypeError('%s is not a directory!', args.path)
     return print_result(args.path)
