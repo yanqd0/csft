@@ -34,9 +34,9 @@ def _find_path_list(path):
     return paths
 
 
-def _file_type(file_path):
-    _, file_name = split(file_path)
-    _, file_type = splitext(file_name)
+def type_of_file(path):
+    _, name = split(path)
+    _, file_type = splitext(name)
     return file_type
 
 
@@ -47,7 +47,7 @@ def _generate_raw_data_from(paths):
         Column.PATH: str_paths,
         Column.SIZE: sizes,
     })
-    data[Column.TYPE] = data[Column.PATH].map(_file_type)
+    data[Column.TYPE] = data[Column.PATH].map(type_of_file)
     return data
 
 
@@ -88,3 +88,4 @@ def print_result(path):
     type_data = _generate_type_data_from(raw_data)
     sorted_data = _sort_by_size(type_data)
     print(sorted_data)
+    return 0
