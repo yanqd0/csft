@@ -1,0 +1,23 @@
+# vim: set shiftwidth=2 tabstop=2 softtabstop=-1 expandtab:
+
+sudo: false
+
+language: python
+
+python:
+  - "2.7"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+
+install:
+  - pip install -e .
+  - pip install -U pytest
+  - pip install pytest-cov
+  - pip install codecov
+
+script:
+  - pytest --cov=csft
+
+after_success:
+  - codecov
