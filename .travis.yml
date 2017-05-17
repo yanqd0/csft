@@ -20,3 +20,12 @@ script:
 
 after_success:
   - codecov
+
+deploy:
+  provider: pypi
+  user: yanqd0
+  password:
+    secure: Mh1+Tx0WmzKXxzTqXWAsmNEDO/loJlR/Xt+rPljQ43lBiIJrEOs3xYe4S7+FHoVsuHGlmu3IronIsrdNCYzY5myOgqae8kBcDqmxw/R7k7eeBYno2c+IgCEh50A0iAO+FXzKjZKTB+TQciQAdpwxdDoxsoH86YLxQxhUReIDQdttVkaq3abU0RS4D7jKUSS+F7ImaMvdJwux4V6ffNONU26M7U9UG8U3sYeI0ggHYCCI5hh1LoMImADkuA8UlIZmC+jfhCMhPpFKdikDRBFS2CTTXH1EE0onka4ihJwPMGRvbu92424NaQBtl8dWXdSuUJs3gjJsPzMoSw0svD+S67VISgDpThyexQHf3jBrXLpXUBkK23sWpIeBa29W+xRfYfBaBiBHIYARWk3Ss6zSq7Nm0gOVHr8vh6YcKF5e9m9daIcMJjAtOpz+hh7IOZbF+GfI6O8OPaYymsvxcbmuCASZMMHQDgrKEI8dr7IbZrFKLJdTPlr7XYbbfsmp3EQm06BGz/4gdZizjEI3A7ewC9y7pJxxNCAncASo9xNKxyVWFYp5UnUCywevLXwOdps21xK1KvmuJvMZCt9HW4iPjYwBgQuz+flW5lktjixe9uJCASlknPKZcx+XMhe3ek5SIbY9Edv6aGDqu8qBV9ySmFHxD6Ap+yCEUaENVQO3M7E=
+  on:
+    branch: master
+    tags: true
