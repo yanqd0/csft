@@ -35,11 +35,19 @@ class _Buffer(object):
 
 def test_show_version():
     test_buf = _Buffer()
-    test_buf, sys.stdout = sys.stdout, test_buf
+    if sys.version < '3.0':
+        test_buf, sys.stderr = sys.stderr, test_buf
+    else:
+        test_buf, sys.stdout = sys.stdout, test_buf
+
     try:
         main.main(argv=['-V'])
     except SystemExit as err:
         assert 0 == err.code
     finally:
-        test_buf, sys.stdout = sys.stdout, test_buf
+        if sys.version < '3.0':
+            test_buf, sys.stderr = sys.stderr, test_buf
+        else:
+            test_buf, sys.stdout = sys.stdout, test_buf
+
     assert test_buf.buffer[0].strip() == csft.__version__
