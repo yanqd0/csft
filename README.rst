@@ -11,16 +11,24 @@ A CLI to count sizes of file types in a directory, implemented by Python.
 Install
 --------
 
-::
+Install from the official PYPI::
+
+    pip install csft
+
+Install from the latest source::
 
     pip install git+https://github.com/yanqd0/csft.git
 
 Usage
 -----
 
-::
+The simplest usage::
 
     csft PATH/TO/YOUR/PROJECT
+
+More Usage::
+
+    csft -h
 
 Result
 ------
