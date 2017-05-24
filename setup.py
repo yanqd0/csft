@@ -51,4 +51,12 @@ setup(
     python_requires='>=2.7',
     install_requires=REQUIRES,
     zip_safe=False,
+    classifiers=[
+        'Development Status :: 2 - Pre-Alpha',
+        'Environment :: Console',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+    ]
 )
