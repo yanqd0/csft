@@ -11,6 +11,15 @@ A CLI to count sizes of file types in a directory, implemented by Python.
 Install
 --------
 
+.. image:: https://img.shields.io/pypi/v/csft.svg
+   :target: https://pypi.python.org/pypi/csft
+.. image:: https://img.shields.io/pypi/format/csft.svg
+   :target: https://pypi.python.org/pypi/csft
+.. image:: https://img.shields.io/pypi/l/csft.svg
+   :target: https://pypi.python.org/pypi/csft
+.. image:: https://img.shields.io/pypi/pyversions/csft.svg
+   :target: https://pypi.python.org/pypi/csft
+
 Install from the official PYPI::
 
     pip install csft
@@ -18,6 +27,11 @@ Install from the official PYPI::
 Install from the latest source::
 
     pip install git+https://github.com/yanqd0/csft.git
+
+.. image:: https://img.shields.io/github/release/yanqd0/csft.svg
+   :target: https://github.com/yanqd0/csft/releases
+.. image:: https://img.shields.io/github/issues/yanqd0/csft.svg
+   :target: https://github.com/yanqd0/csft/issues
 
 Usage
 -----
@@ -47,9 +61,3 @@ Something like this::
     8        .2     41
     9        .1     41
     10       .0     41
-
-Licence
--------
-
-.. image:: https://img.shields.io/github/license/yanqd0/csft.svg
-   :target: https://github.com/yanqd0/csft/blob/master/LICENSE
