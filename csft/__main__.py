@@ -10,7 +10,7 @@ from os.path import isdir
 
 from . import __name__ as _name
 from . import __version__ as _version
-from .csft import print_result
+from .csft import csft2data
 
 
 def main(argv=None):
@@ -21,7 +21,10 @@ def main(argv=None):
     args = parser.parse_args(args=argv)
     if not isdir(args.path):
         raise TypeError('%s is not a directory!', args.path)
-    return print_result(args.path)
+
+    data = csft2data(args.path)
+    print(data)
+    return 0
 
 
 if __name__ == '__main__':

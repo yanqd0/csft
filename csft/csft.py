@@ -7,9 +7,9 @@ The implementations of csft.
 import sys
 from collections import OrderedDict
 from os.path import split, splitext
+from pathlib import Path
 
 from pandas import DataFrame, Series
-from pathlib import Path
 
 if sys.version < '3.5':
     from scandir import walk
@@ -75,10 +75,9 @@ def _sort_by_size(data):
     return sorted_data.reset_index(drop=True)
 
 
-def print_result(path):
+def csft2data(path):
     paths = _find_path_list(path)
     raw_data = _generate_raw_data_from(paths)
     type_data = _generate_type_data_from(raw_data)
     sorted_data = _sort_by_size(type_data)
-    print(sorted_data)
-    return 0
+    return sorted_data
