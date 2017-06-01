@@ -12,7 +12,3 @@ from .__info__ import (
     __license__,
     __url__,
 )
-
-from .csft import (
-    csft2data,
-)
