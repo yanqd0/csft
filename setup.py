@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-""" Setup script for csft """
+""" Setup for csft """
+
 import codecs
 import sys
 from os.path import abspath, dirname, join
 
 from setuptools import find_packages, setup
 
-import csft
+from csft import __info__ as info
 
 VER = sys.version
 HERE = abspath(dirname(__file__))
@@ -34,14 +35,14 @@ if VER < '3.5':
     REQUIRES.append('scandir >= 1.5')
 
 setup(
-    name=csft.__name__,
-    version=csft.__version__,
+    name=info.__package__,
+    version=info.__version__,
     description='Count Sizes of File Types',
     long_description=_read('README.rst'),
-    url=csft.__url__,
-    author=csft.__author__,
-    author_email=csft.__email__,
-    license=csft.__license__,
+    url=info.__url__,
+    author=info.__author__,
+    author_email=info.__email__,
+    license=info.__license__,
     packages=find_packages(),
     entry_points={
         'console_scripts': (
