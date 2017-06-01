@@ -4,11 +4,9 @@
 Count Sizes of File Types
 """
 
-from .__info__ import (
-    __author__,
-    __version__,
-    __email__,
-    __copyright__,
-    __license__,
-    __url__,
-)
+__author__ = 'Yan QiDong'
+__version__ = '0.2.1'
+__email__ = 'yanqd0@outlook.com'
+__url__ = 'https://github.com/yanqd0/csft'
+__copyright__ = 'Copyright (C) 2017 ' + __author__
+__license__ = 'MIT License'
