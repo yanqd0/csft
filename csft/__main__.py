@@ -10,7 +10,7 @@ from os.path import isdir
 
 from . import __name__ as _name
 from . import __version__ as _version
-from .csft import csft2data
+from .csft import csft2data, Column
 
 
 def _positive_int(num):
@@ -26,11 +26,31 @@ def _parse_args(argv):
     parser.add_argument('path', help='the directory to be analyzed')
     parser.add_argument('--top', type=_positive_int, metavar='N',
                         help='only display top N results')
+    parser.add_argument('-p', '--pretty', action='store_true',
+                        help='print size with units')
 
     args = parser.parse_args(args=argv)
     if not isdir(args.path):
         raise TypeError('%s is not a directory!', args.path)
     return args
+
+
+def pretty_byte(byte):
+    """
+    Convert raw bytes to a value with an appropriate unit.
+
+    :param byte: The number of bytes to be convert.
+    :return: A value with an appropriate unit.
+    """
+    if byte < 0:
+        raise ValueError('%s is not positive!', byte)
+
+    units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB']
+    index = 0
+    for index, _ in enumerate(units):
+        if byte >> (10 * (index + 1)) <= 0:
+            break
+    return '%d %s' % (byte / (1024 ** index), units[index])
 
 
 def main(argv=None):
@@ -40,6 +60,9 @@ def main(argv=None):
 
     if args.top:
         data = data.head(args.top)
+
+    if args.pretty:
+        data[Column.SIZE] = data[Column.SIZE].map(pretty_byte)
 
     print(data)
     return 0
