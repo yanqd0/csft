@@ -3,7 +3,6 @@
 """
 Count Sizes of File Types
 """
-
 __author__ = 'Yan QiDong'
 __version__ = '0.2.1'
 __email__ = 'yanqd0@outlook.com'
@@ -12,9 +11,10 @@ __copyright__ = 'Copyright (C) 2017 ' + __author__
 __license__ = 'MIT License'
 
 
-def _err_func(err):
+def _err_func(error):
     def _func(*args, **kwargs):
-        raise err
+        print(args, kwargs)
+        raise error
 
     return _func
 
