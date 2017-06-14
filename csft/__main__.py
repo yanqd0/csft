@@ -6,11 +6,20 @@ The entry point of csft.
 """
 
 import argparse as ap
-from os.path import isdir
+
+from pathlib import Path
 
 from . import __name__ as _name
 from . import __version__ as _version
 from .csft import csft2data, Column
+
+
+def _dir(path_str):
+    path = Path(path_str)
+    if not path.is_dir():
+        raise TypeError('%s is not a directory!', path_str)
+    else:
+        return path
 
 
 def _positive_int(num):
@@ -23,16 +32,13 @@ def _positive_int(num):
 def _parse_args(argv):
     parser = ap.ArgumentParser(prog=_name)
     parser.add_argument('-V', '--version', action='version', version=_version)
-    parser.add_argument('path', help='the directory to be analyzed')
+    parser.add_argument('path', type=_dir, help='the directory to be analyzed')
     parser.add_argument('--top', type=_positive_int, metavar='N',
                         help='only display top N results')
     parser.add_argument('-p', '--pretty', action='store_true',
                         help='print size with units')
 
-    args = parser.parse_args(args=argv)
-    if not isdir(args.path):
-        raise TypeError('%s is not a directory!', args.path)
-    return args
+    return parser.parse_args(args=argv)
 
 
 def pretty_byte(byte):

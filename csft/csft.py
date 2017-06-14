@@ -25,7 +25,7 @@ class Column(object):
 
 def _find_path_list(path):
     paths = []
-    for parent, _, files in walk(path):
+    for parent, _, files in walk(str(path)):
         parent_path = Path(parent)
         for name in files:
             file_path = parent_path.joinpath(name)

@@ -21,7 +21,7 @@ def test_wrong_path():
     with raises(SystemExit):
         main.main(argv=[])
 
-    with raises(TypeError):
+    with raises(SystemExit):
         main.main(argv=['path/is/not/a/directory'])
 
 
