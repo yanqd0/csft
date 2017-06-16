@@ -6,7 +6,6 @@ The entry point of csft.
 """
 
 import argparse as ap
-
 from pathlib import Path
 
 from . import __name__ as _name

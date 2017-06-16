@@ -5,6 +5,8 @@ csft - Count Sizes of File Types
     :target: https://travis-ci.org/yanqd0/csft
 .. image:: https://codecov.io/gh/yanqd0/csft/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/yanqd0/csft
+.. image:: https://img.shields.io/github/license/yanqd0/csft.svg
+    :target: https://github.com/yanqd0/csft/blob/master/LICENSE
 
 A CLI to count sizes of file types in a directory, implemented by Python.
 
@@ -14,8 +16,6 @@ Install
 .. image:: https://img.shields.io/pypi/v/csft.svg
    :target: https://pypi.python.org/pypi/csft
 .. image:: https://img.shields.io/pypi/format/csft.svg
-   :target: https://pypi.python.org/pypi/csft
-.. image:: https://img.shields.io/pypi/l/csft.svg
    :target: https://pypi.python.org/pypi/csft
 .. image:: https://img.shields.io/pypi/pyversions/csft.svg
    :target: https://pypi.python.org/pypi/csft
