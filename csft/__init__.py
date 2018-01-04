@@ -20,7 +20,7 @@ def _err_func(error):
 
 
 try:
-    from .csft import csft2data
+    from ._csft import csft2data
 except ImportError as err:
     print(err)
     csft2data = _err_func(err)

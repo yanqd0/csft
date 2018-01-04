@@ -10,7 +10,7 @@ from pathlib import Path
 
 from . import __name__ as _name
 from . import __version__ as _version
-from .csft import csft2data, Column
+from ._csft import csft2data, Column
 
 
 def _dir(path_str):
