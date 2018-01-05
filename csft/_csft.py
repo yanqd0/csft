@@ -6,7 +6,7 @@ The implementations of csft.
 
 import sys
 from collections import OrderedDict
-from os.path import split, splitext
+from os.path import getsize, islink, join, split, splitext
 from pathlib import Path
 
 from pandas import DataFrame, Series
@@ -24,12 +24,14 @@ class Column(object):
 
 
 def _find_path_list(path):
+    if isinstance(path, Path):
+        path = str(path)
+
     paths = []
-    for parent, _, files in walk(str(path)):
-        parent_path = Path(parent)
+    for parent, _, files in walk(path):
         for name in files:
-            file_path = parent_path.joinpath(name)
-            if not file_path.is_symlink():
+            file_path = join(parent, name)
+            if not islink(file_path):
                 paths.append(file_path)
     return paths
 
@@ -41,11 +43,9 @@ def type_of_file(path):
 
 
 def _generate_raw_data_from(paths):
-    str_paths = Series([str(path) for path in paths])
-    sizes = Series([path.stat().st_size for path in paths])
     data = DataFrame({
-        Column.PATH: str_paths,
-        Column.SIZE: sizes,
+        Column.PATH: Series(paths),
+        Column.SIZE: Series([getsize(path) for path in paths]),
     })
     data[Column.TYPE] = data[Column.PATH].map(type_of_file)
     return data
