@@ -21,7 +21,8 @@ def _read(rel_path):
 
 
 REQUIRES = [
-    'pandas >= 0.20.1',
+    'pandas >= 0.21.1',
+    'numpy>=1.13.3',
 ]
 
 if VER >= '3.0' and VER < '3.2':
