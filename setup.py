@@ -21,8 +21,8 @@ def _read(rel_path):
 
 
 REQUIRES = [
-    'pandas >= 0.21.1',
-    'numpy>=1.13.3',
+    'pandas >= 0.20.3',
+    'numpy >= 1.13.3',
 ]
 
 if VER >= '3.0' and VER < '3.2':
@@ -54,11 +54,11 @@ setup(
     python_requires='>=2.7',
     install_requires=REQUIRES,
     setup_requires=[
-        'pytest-runner>=3.0',
+        'pytest-runner',
     ],
     tests_require=[
-        'pytest>=3.3.1',
-        'pytest-cov>=2.5.1',
+        'pytest',
+        'pytest-cov',
     ],
 
     zip_safe=False,
