@@ -43,14 +43,24 @@ setup(
     author=csft.__author__,
     author_email=csft.__email__,
     license=csft.__license__,
+
     packages=find_packages(),
     entry_points={
         'console_scripts': (
             'csft = csft.__main__:main',
         ),
     },
+
     python_requires='>=2.7',
     install_requires=REQUIRES,
+    setup_requires=[
+        'pytest-runner>=3.0',
+    ],
+    tests_require=[
+        'pytest>=3.3.1',
+        'pytest-cov>=2.5.1',
+    ],
+
     zip_safe=False,
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
