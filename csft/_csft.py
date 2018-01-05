@@ -23,7 +23,7 @@ class Column(object):
     TYPE = 'type'
 
 
-def _find_path_list(path):
+def make_file_list(path):
     if isinstance(path, Path):
         path = str(path)
 
@@ -76,7 +76,7 @@ def _sort_by_size(data):
 
 
 def csft2data(path):
-    paths = _find_path_list(path)
+    paths = make_file_list(path)
     raw_data = _generate_raw_data_from(paths)
     type_data = _generate_type_data_from(raw_data)
     sorted_data = _sort_by_size(type_data)
