@@ -42,6 +42,7 @@ setup(
     tests_require=[
         'pytest',
         'pytest-cov',
+        'pytest-mock',
     ],
 
     zip_safe=False,

@@ -39,7 +39,7 @@ def type_of_file(path):
     return file_type
 
 
-def _generate_raw_data_from(paths):
+def make_raw_data(paths):
     data = DataFrame({
         column.PATH: Series(paths),
         column.SIZE: Series([getsize(path) for path in paths]),
@@ -74,7 +74,7 @@ def _sort_by_size(data):
 
 def csft2data(path):
     paths = make_file_list(path)
-    raw_data = _generate_raw_data_from(paths)
+    raw_data = make_raw_data(paths)
     type_data = _generate_type_data_from(raw_data)
     sorted_data = _sort_by_size(type_data)
     return sorted_data
