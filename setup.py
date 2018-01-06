@@ -2,23 +2,11 @@
 # -*- coding:utf-8 -*-
 
 """ Setup script for csft """
-import codecs
-import sys
-from os.path import abspath, dirname, join
+from sys import version as VER
 
 from setuptools import find_packages, setup
 
 import csft
-
-VER = sys.version
-HERE = abspath(dirname(__file__))
-
-
-def _read(rel_path):
-    path = join(HERE, rel_path)
-    with codecs.open(path, "rb", "utf-8") as file_obj:
-        return file_obj.read()
-
 
 REQUIRES = [
     'pandas >= 0.20.3',
@@ -34,7 +22,6 @@ setup(
     name=csft.__name__,
     version=csft.__version__,
     description='Count Sizes of File Types',
-    long_description=_read('README.rst'),
     url=csft.__url__,
     author=csft.__author__,
     author_email=csft.__email__,
