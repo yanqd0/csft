@@ -22,11 +22,7 @@ def _read(rel_path):
 
 REQUIRES = [
     'pandas >= 0.20.3',
-    'numpy >= 1.13.3',
 ]
-
-if VER >= '3.0' and VER < '3.2':
-    REQUIRES.append('argparse >= 1.4.0')
 
 if VER < '3.4':
     REQUIRES.append('pathlib >= 1.0.1')
@@ -51,7 +47,7 @@ setup(
         ),
     },
 
-    python_requires='>=2.7',
+    python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*',
     install_requires=REQUIRES,
     setup_requires=[
         'pytest-runner',
@@ -68,6 +64,9 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
     ]
 )
