@@ -10,7 +10,7 @@ from pathlib import Path
 
 from . import __name__ as _name
 from . import __version__ as _version
-from ._csft import csft2data, Column
+from ._csft import csft2data, column
 
 
 def _dir(path_str):
@@ -67,7 +67,7 @@ def main(argv=None):
         data = data.head(args.top)
 
     if args.pretty:
-        data[Column.SIZE] = data[Column.SIZE].map(pretty_byte)
+        data[column.SIZE] = data[column.SIZE].map(pretty_byte)
 
     print(data)
     return 0

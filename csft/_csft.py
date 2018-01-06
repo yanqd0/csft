@@ -5,7 +5,7 @@ The implementations of csft.
 """
 
 import sys
-from collections import OrderedDict
+from collections import OrderedDict, namedtuple
 from os.path import getsize, islink, join, split, splitext
 from pathlib import Path
 
@@ -16,11 +16,8 @@ if sys.version < '3.5':
 else:
     from os import walk
 
-
-class Column(object):
-    PATH = 'path'
-    SIZE = 'size'
-    TYPE = 'type'
+_Column = namedtuple('Column', ['PATH', 'SIZE', 'TYPE'])
+column = _Column(PATH='path', SIZE='size', TYPE='type')
 
 
 def make_file_list(path):
@@ -44,34 +41,34 @@ def type_of_file(path):
 
 def _generate_raw_data_from(paths):
     data = DataFrame({
-        Column.PATH: Series(paths),
-        Column.SIZE: Series([getsize(path) for path in paths]),
+        column.PATH: Series(paths),
+        column.SIZE: Series([getsize(path) for path in paths]),
     })
-    data[Column.TYPE] = data[Column.PATH].map(type_of_file)
+    data[column.TYPE] = data[column.PATH].map(type_of_file)
     return data
 
 
 def _type_size_sum(data, types):
     sizes = []
     for file_type in types:
-        type_data = data[data[Column.TYPE] == file_type]
-        sizes.append(type_data[Column.SIZE].sum())
+        type_data = data[data[column.TYPE] == file_type]
+        sizes.append(type_data[column.SIZE].sum())
     return Series(sizes)
 
 
 def _generate_type_data_from(data):
-    types = set([file_type for file_type in data[Column.TYPE]])
+    types = set([file_type for file_type in data[column.TYPE]])
     types = Series(tuple(types))
     sizes = _type_size_sum(data, types)
 
     type_size = OrderedDict()
-    type_size[Column.TYPE] = types
-    type_size[Column.SIZE] = sizes
+    type_size[column.TYPE] = types
+    type_size[column.SIZE] = sizes
     return DataFrame(type_size)
 
 
 def _sort_by_size(data):
-    sorted_data = data.sort_values(Column.SIZE, ascending=False)
+    sorted_data = data.sort_values(column.SIZE, ascending=False)
     return sorted_data.reset_index(drop=True)
 
 
