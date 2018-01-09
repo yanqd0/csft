@@ -5,6 +5,9 @@ csft - Count Sizes of File Types
     :target: https://travis-ci.org/yanqd0/csft
 .. image:: https://codecov.io/gh/yanqd0/csft/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/yanqd0/csft
+.. image:: https://requires.io/github/yanqd0/csft/requirements.svg?branch=master
+     :target: https://requires.io/github/yanqd0/csft/requirements/?branch=master
+     :alt: Requirements Status
 .. image:: https://img.shields.io/github/license/yanqd0/csft.svg
     :target: https://github.com/yanqd0/csft/blob/master/LICENSE
 
