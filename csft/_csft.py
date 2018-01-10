@@ -56,8 +56,8 @@ def _type_size_sum(data, types):
     return Series(sizes)
 
 
-def _generate_type_data_from(data):
-    types = set([file_type for file_type in data[column.TYPE]])
+def sum_data_by_type(data):
+    types = set(file_type for file_type in data[column.TYPE])
     types = Series(tuple(types))
     sizes = _type_size_sum(data, types)
 
@@ -67,14 +67,14 @@ def _generate_type_data_from(data):
     return DataFrame(type_size)
 
 
-def _sort_by_size(data):
-    sorted_data = data.sort_values(column.SIZE, ascending=False)
+def sort_data_frame(data, by):
+    sorted_data = data.sort_values(by, ascending=False)
     return sorted_data.reset_index(drop=True)
 
 
 def csft2data(path):
     paths = make_file_list(path)
     raw_data = make_raw_data(paths)
-    type_data = _generate_type_data_from(raw_data)
-    sorted_data = _sort_by_size(type_data)
+    type_data = sum_data_by_type(raw_data)
+    sorted_data = sort_data_frame(type_data, column.SIZE)
     return sorted_data

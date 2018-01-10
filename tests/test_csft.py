@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-from collections import Iterable
+from collections import Iterable, OrderedDict
 from os.path import dirname, isfile, join
 
 from pandas import DataFrame, Series
@@ -52,3 +52,42 @@ def test_type_size_data():
     data = _csft.csft2data(test_dir)
     assert isinstance(data, DataFrame)
     assert data['type'].str.contains('py').sum()
+
+
+def test_sum_data_by_type():
+    test = DataFrame({
+        column.SIZE: (1, 2, 3, 4, 5),
+        column.TYPE: ('a', 'b', 'c', 'a', 'b'),
+    })
+    expect = OrderedDict()
+    expect[column.TYPE] = ('b', 'a', 'c')
+    expect[column.SIZE] = (7, 5, 3)
+    expect = DataFrame(expect)
+    backup = test.copy(deep=True)
+
+    result = _csft.sum_data_by_type(data=test)
+    assert isinstance(result, DataFrame)
+    assert len(result[column.TYPE]) == len(expect[column.TYPE])
+    assert len(result[column.SIZE]) == len(expect[column.SIZE])
+    assert all(result[column.TYPE].isin(expect[column.TYPE]))
+    type2size = {t: result[column.SIZE][index]
+                 for index, t in enumerate(result[column.TYPE])}
+    assert all(type2size[t] == expect[column.SIZE][index]
+               for index, t in enumerate(expect[column.TYPE]))
+
+    assert all(test == backup)
+
+
+def test_sort_data_frame():
+    oredered = OrderedDict()
+    oredered[column.TYPE] = ('a', 'b', 'c')
+    oredered[column.SIZE] = (111, 222, 333)
+    test = DataFrame(oredered)
+    oredered[column.TYPE] = ('c', 'b', 'a')
+    oredered[column.SIZE] = (333, 222, 111)
+    expect = DataFrame(oredered)
+    backup = test.copy()
+
+    assert all(expect == _csft.sort_data_frame(data=test, by=column.TYPE))
+    assert all(expect == _csft.sort_data_frame(data=test, by=column.SIZE))
+    assert all(test == backup)
