@@ -43,6 +43,7 @@ setup(
         'pytest',
         'pytest-cov',
         'pytest-mock',
+        'mock',
     ],
 
     zip_safe=False,
