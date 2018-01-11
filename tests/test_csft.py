@@ -91,3 +91,17 @@ def test_sort_data_frame():
     assert all(expect == _csft.sort_data_frame(data=test, by=column.TYPE))
     assert all(expect == _csft.sort_data_frame(data=test, by=column.SIZE))
     assert all(test == backup)
+
+
+def test_csft2data(mocker):
+    mock_list = [
+        mocker.patch('csft._csft.make_file_list', return_value=1),
+        mocker.patch('csft._csft.make_raw_data', return_value=2),
+        mocker.patch('csft._csft.sum_data_by_type', return_value=3),
+        mocker.patch('csft._csft.sort_data_frame', return_value=4),
+    ]
+
+    assert 4 == _csft.csft2data(0)
+    for index in range(3):
+        mock_list[index].assert_called_once_with(index)
+    mock_list[3].assert_called_once_with(3, column.SIZE)
