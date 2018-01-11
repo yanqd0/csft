@@ -34,6 +34,9 @@ def test_make_file_list(tempdir):
     assert isinstance(files, Iterable)
     assert all(isfile(f) for f in files)
 
+    from pathlib import Path
+    assert files == _csft.make_file_list(Path(tempdir))
+
 
 def test_make_raw_data(mocker):
     paths = ['file.a', 'file.b', 'file.c']
