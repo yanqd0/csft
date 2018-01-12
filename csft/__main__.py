@@ -6,11 +6,12 @@ The entry point of csft.
 """
 
 import argparse as ap
+import sys
+from os.path import curdir
 from pathlib import Path
 
-from . import __name__ as _name
-from . import __version__ as _version
-from ._csft import csft2data, column
+from . import __name__ as _name, __version__ as _version
+from ._csft import column, csft2data
 
 
 def _dir(path_str):
@@ -60,6 +61,11 @@ def pretty_byte(byte):
 
 def main(argv=None):
     """Execute the application from CLI."""
+    if argv is None:
+        argv = sys.argv[1:]
+    if not argv:
+        argv = [curdir]
+
     args = _parse_args(argv)
     data = csft2data(args.path)
 
