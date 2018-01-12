@@ -1,53 +1,59 @@
 # -*- coding:utf-8 -*-
 
-import sys
+from contextlib import redirect_stderr, redirect_stdout
+from io import StringIO
+from os.path import devnull
 from subprocess import check_call
+from sys import version
 
-from pytest import raises
+from pytest import fixture, raises
 
-import csft
-from csft import __main__ as main
-
-
-def test_call():
-    check_call(['python', '-m', 'csft', '.'])
+from csft import __main__ as main, __version__
 
 
-def test_main():
-    assert 0 == main.main(argv=['.'])
+@fixture
+def null():
+    with open(devnull, 'w') as fobj:
+        yield fobj
 
 
-def test_wrong_path():
+def test_call(null):
+    check_call(['python', '-m', 'csft', 'csft'], stdout=null, stderr=null)
+
+
+def test_main(mocker):
+    obj = object()
+    csft2data = mocker.patch('csft.__main__.csft2data', return_value=obj)
+    pr = mocker.patch('builtins.print')
+    assert 0 == main.main(argv=['csft'])
+    csft2data.assert_called_once_with(main._dir('csft'))
+    pr.assert_called_once_with(obj)
+
+
+def test_wrong_path(capsys):
     with raises(SystemExit):
         main.main(argv=[])
+    assert capsys.readouterr()
 
     with raises(SystemExit):
         main.main(argv=['path/is/not/a/directory'])
-
-
-class _Buffer(object):
-    def __init__(self):
-        self.buffer = []
-
-    def write(self, text):
-        self.buffer.append(text)
+    assert capsys.readouterr()
 
 
 def test_show_version():
-    test_buf = _Buffer()
-    if sys.version < '3.0':
-        test_buf, sys.stderr = sys.stderr, test_buf
+    def print_version():
+        try:
+            main.main(argv=['-V'])
+        except SystemExit as err:
+            assert 0 == err.code
+
+    buffer = StringIO()
+    if version < '3.0':
+        with redirect_stderr(buffer):
+            print_version()
     else:
-        test_buf, sys.stdout = sys.stdout, test_buf
+        with redirect_stdout(buffer):
+            print_version()
 
-    try:
-        main.main(argv=['-V'])
-    except SystemExit as err:
-        assert 0 == err.code
-    finally:
-        if sys.version < '3.0':
-            test_buf, sys.stderr = sys.stderr, test_buf
-        else:
-            test_buf, sys.stdout = sys.stdout, test_buf
-
-    assert test_buf.buffer[0].strip() == csft.__version__
+    assert __version__ == buffer.getvalue().strip()
+    buffer.close()
