@@ -45,4 +45,5 @@ def test_show_version(capsys):
         assert 0 == err.code
 
     from csft import __version__
-    assert __version__ == capsys.readouterr().out.strip()
+    out = capsys.readouterr()[0]
+    assert __version__ == out.strip()
