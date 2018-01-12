@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 
+import sys
 from os.path import curdir, devnull
 from subprocess import check_call
 
@@ -19,17 +20,19 @@ def test_call(null):
 
 
 @mark.parametrize('argv', [None, [], ['csft'], ])
-def test_main(argv, mocker):
-    obj = object()
+def test_main(argv, mocker, capsys):
+    expect = 'TEST_PRINT'
     mocker.patch('sys.argv', ['csft'])
-    csft2data = mocker.patch('csft.__main__.csft2data', return_value=obj)
-    pr = mocker.patch('builtins.print')
+    csft2data = mocker.patch('csft.__main__.csft2data', return_value=expect)
+
     assert 0 == main.main(argv=argv)
+
     if argv:
         csft2data.assert_called_once_with(main._dir(argv[0]))
     else:
         csft2data.assert_called_once_with(main._dir(curdir))
-    pr.assert_called_once_with(obj)
+
+    assert expect == capsys.readouterr()[0].strip()
 
 
 def test_wrong_path(capsys):
@@ -45,5 +48,8 @@ def test_show_version(capsys):
         assert 0 == err.code
 
     from csft import __version__
-    out = capsys.readouterr()[0]
+    if sys.version < '3.0':
+        out = capsys.readouterr()[1]
+    else:
+        out = capsys.readouterr()[0]
     assert __version__ == out.strip()
