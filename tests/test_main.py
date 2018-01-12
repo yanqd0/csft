@@ -1,14 +1,11 @@
 # -*- coding:utf-8 -*-
 
-from contextlib import redirect_stderr, redirect_stdout
-from io import StringIO
 from os.path import devnull
 from subprocess import check_call
-from sys import version
 
 from pytest import fixture, raises
 
-from csft import __main__ as main, __version__
+from csft import __main__ as main
 
 
 @fixture
@@ -40,20 +37,11 @@ def test_wrong_path(capsys):
     assert capsys.readouterr()
 
 
-def test_show_version():
-    def print_version():
-        try:
-            main.main(argv=['-V'])
-        except SystemExit as err:
-            assert 0 == err.code
+def test_show_version(capsys):
+    try:
+        main.main(argv=['-V'])
+    except SystemExit as err:
+        assert 0 == err.code
 
-    buffer = StringIO()
-    if version < '3.0':
-        with redirect_stderr(buffer):
-            print_version()
-    else:
-        with redirect_stdout(buffer):
-            print_version()
-
-    assert __version__ == buffer.getvalue().strip()
-    buffer.close()
+    from csft import __version__
+    assert __version__ == capsys.readouterr().out.strip()
