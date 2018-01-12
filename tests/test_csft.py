@@ -16,10 +16,12 @@ def test_file_type():
 
 @fixture
 def tempdir(tmpdir):
-    import shutil
-    shutil.copytree('csft', join(tmpdir, 'csft'))
-    shutil.copy('LICENSE', tmpdir)
-    shutil.copy('requirements.txt', tmpdir)
+    from shutil import copy, copytree
+    tmpdir = str(tmpdir)
+
+    copytree('csft', join(tmpdir, 'csft'))
+    copy('LICENSE', tmpdir)
+    copy('requirements.txt', tmpdir)
     return tmpdir
 
 
