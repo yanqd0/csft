@@ -14,18 +14,13 @@ def test_file_type():
     assert '' == _csft.type_of_file('no_ext')
 
 
-@fixture(scope='module')
-def tempdir():
-    import tempfile
+@fixture
+def tempdir(tmpdir):
     import shutil
-
-    temp = tempfile.mkdtemp()
-    shutil.copytree('csft', join(temp, 'csft'))
-    shutil.copy('LICENSE', temp)
-    shutil.copy('requirements.txt', temp)
-    yield temp
-
-    shutil.rmtree(temp)
+    shutil.copytree('csft', join(tmpdir, 'csft'))
+    shutil.copy('LICENSE', tmpdir)
+    shutil.copy('requirements.txt', tmpdir)
+    return tmpdir
 
 
 def test_make_file_list(tempdir):
