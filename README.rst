@@ -28,6 +28,9 @@ Install
 .. image:: https://img.shields.io/pypi/format/csft.svg
    :target: https://pypi.python.org/pypi/csft
    :alt: format
+.. image:: https://img.shields.io/pypi/status/csft.svg
+   :target: https://pypi.python.org/pypi/csft
+   :alt: status
 .. image:: https://img.shields.io/pypi/pyversions/csft.svg
    :target: https://pypi.python.org/pypi/csft
    :alt: versions
