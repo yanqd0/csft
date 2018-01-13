@@ -4,6 +4,7 @@ import sys
 from os.path import curdir, devnull
 from subprocess import check_call
 
+from pandas import DataFrame
 from pytest import fixture, mark, raises
 
 from csft import __main__ as main
@@ -53,3 +54,19 @@ def test_show_version(capsys):
     else:
         out = capsys.readouterr()[0]
     assert __version__ == out.strip()
+
+
+def test_arg_top(mocker, capsys):
+    expect = 'TEST_PRINT'
+    obj = DataFrame()
+    mocker.patch.object(obj, 'head', return_value=expect)
+    csft2data = mocker.patch('csft.__main__.csft2data', return_value=obj)
+
+    assert 0 == main.main(argv=[curdir, '--top', '5'])
+    csft2data.assert_called_once_with(main._dir(curdir))
+    assert expect == capsys.readouterr()[0].strip()
+
+    with raises(SystemExit):
+        main.main(argv=[curdir, '--top', 'not-a-number'])
+    with raises(SystemExit):
+        main.main(argv=[curdir, '--top', '-1'])

@@ -5,8 +5,8 @@
 The entry point of csft.
 """
 
-import argparse as ap
 import sys
+from argparse import ArgumentParser
 from os.path import curdir
 from pathlib import Path
 
@@ -30,7 +30,7 @@ def _positive_int(num):
 
 
 def _parse_args(argv):
-    parser = ap.ArgumentParser(prog=_name)
+    parser = ArgumentParser(prog=_name)
     parser.add_argument('-V', '--version', action='version', version=_version)
     parser.add_argument('path', type=_dir, help='the directory to be analyzed')
     parser.add_argument('--top', type=_positive_int, metavar='N',
