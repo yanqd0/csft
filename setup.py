@@ -13,7 +13,10 @@ REQUIRES = [
 ]
 
 if VER < '3.4':
-    REQUIRES.append('pathlib >= 1.0.1')
+    REQUIRES = [
+        'pandas >= 0.20.3, < 0.22',
+        'pathlib >= 1.0.1'
+    ]
 
 if VER < '3.5':
     REQUIRES.append('scandir >= 1.5')
