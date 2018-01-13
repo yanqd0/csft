@@ -3,6 +3,8 @@ csft - Count Sizes of File Types
 
 .. image:: https://travis-ci.org/yanqd0/csft.svg?branch=master
     :target: https://travis-ci.org/yanqd0/csft
+.. image:: https://ci.appveyor.com/api/projects/status/hu856hh9u575t69t/branch/master?svg=true
+    :target: https://ci.appveyor.com/project/yanqd0/csft/branch/master
 .. image:: https://codecov.io/gh/yanqd0/csft/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/yanqd0/csft
 .. image:: https://requires.io/github/yanqd0/csft/requirements.svg?branch=master
