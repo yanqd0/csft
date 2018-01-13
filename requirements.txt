@@ -4,6 +4,7 @@ pathlib >= 1.0.1
 pytest
 pytest-cov
 pytest-pep8
+pytest-flakes
 pytest-runner
 pytest-mock
 mock
