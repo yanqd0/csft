@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 """ Setup script for csft """
-from sys import version as VER
+from sys import version
 
 from setuptools import find_packages, setup
 
@@ -13,13 +13,11 @@ REQUIRES = [
     'humanfriendly >= 4.6',
 ]
 
-if VER < '3.4':
-    REQUIRES = [
-        'pandas >= 0.20.3, < 0.22',
-        'pathlib >= 1.0.1'
-    ]
+if version < '3.4':
+    REQUIRES.append('pathlib >= 1.0.1')
 
-if VER < '3.5':
+if version < '3.5':
+    REQUIRES[0] = 'pandas >= 0.20.3, < 0.22',
     REQUIRES.append('scandir >= 1.5')
 
 setup(
