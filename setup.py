@@ -2,11 +2,10 @@
 # -*- coding:utf-8 -*-
 
 """ Setup script for csft """
+import runpy
 from sys import version
 
 from setuptools import find_packages, setup
-
-import csft
 
 REQUIRES = [
     'pandas >= 0.20.3',
@@ -20,14 +19,17 @@ if version < '3.5':
     REQUIRES[0] = 'pandas >= 0.20.3, < 0.22',
     REQUIRES.append('scandir >= 1.5')
 
+info = runpy.run_path('csft/__init__.py', run_name='setup')
+
 setup(
-    name=csft.__name__,
-    use_scm_version=True,
+    name='csft',
     description='Count Sizes of File Types',
-    url=csft.__url__,
-    author=csft.__author__,
-    author_email=csft.__email__,
-    license=csft.__license__,
+    use_scm_version=True,
+
+    url=info['__url__'],
+    author=info['__author__'],
+    author_email=info['__email__'],
+    license=info['__license__'],
 
     packages=find_packages(),
     entry_points={

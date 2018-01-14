@@ -4,6 +4,8 @@
 Count Sizes of File Types
 """
 
+from csft._csft import csft2data
+
 __author__ = 'Yan QiDong'
 __version__ = '0.3.0'
 __email__ = 'yanqd0@outlook.com'
@@ -20,18 +22,5 @@ else:
         __version__ = get_distribution(__name__).version
     except DistributionNotFound:
         __version__ = 'x.x.x.dev'
-
-
-def _err_func(error):
-    def _func(*args, **kwargs):
-        print(args, kwargs)
-        raise error
-
-    return _func
-
-
-try:
-    from ._csft import csft2data
-except ImportError as err:
-    print(err)
-    csft2data = _err_func(err)
+    finally:
+        del DistributionNotFound, get_distribution
