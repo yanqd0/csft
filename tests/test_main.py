@@ -8,6 +8,7 @@ from pandas import DataFrame
 from pytest import fixture, mark, raises
 
 from csft import __main__ as main
+from csft._csft import column
 
 
 @fixture
@@ -16,15 +17,22 @@ def null():
         yield fobj
 
 
+@fixture
+def data():
+    return DataFrame({
+        column.TYPE: ('a', 'b', 'c'),
+        column.SIZE: (3, 2, 1),
+    })
+
+
 def test_call(null):
     check_call(['python', '-m', 'csft', 'csft'], stdout=null, stderr=null)
 
 
-@mark.parametrize('argv', [None, [], ['csft'], ])
-def test_main(argv, mocker, capsys):
-    expect = 'TEST_PRINT'
+@mark.parametrize('argv', [None, [], [''], ['csft'], ])
+def test_main(argv, data, mocker, capsys):
     mocker.patch('sys.argv', ['csft'])
-    csft2data = mocker.patch('csft.__main__.csft2data', return_value=expect)
+    csft2data = mocker.patch('csft.__main__.csft2data', return_value=data)
 
     assert 0 == main.main(argv=argv)
 
@@ -33,13 +41,18 @@ def test_main(argv, mocker, capsys):
     else:
         csft2data.assert_called_once_with(main._dir(curdir))
 
-    assert expect == capsys.readouterr()[0].strip()
+    out, err = capsys.readouterr()
+    assert out
+    assert not err
 
 
-def test_wrong_path(capsys):
+@mark.parametrize('path', ['path/not/exist', 'path/not/valid<?*>', 'LICENSE'])
+def test_wrong_path(path, capsys):
     with raises(SystemExit):
-        main.main(argv=['path/is/not/a/directory'])
-    assert capsys.readouterr()
+        main.main(argv=[path])
+    out, err = capsys.readouterr()
+    assert not out
+    assert err
 
 
 def test_show_version(capsys):
@@ -50,23 +63,44 @@ def test_show_version(capsys):
 
     from csft import __version__
     if sys.version < '3.0':
-        out = capsys.readouterr()[1]
+        _, out = capsys.readouterr()
     else:
-        out = capsys.readouterr()[0]
+        out, _ = capsys.readouterr()
     assert __version__ == out.strip()
 
 
-def test_arg_top(mocker, capsys):
-    expect = 'TEST_PRINT'
-    obj = DataFrame()
-    mocker.patch.object(obj, 'head', return_value=expect)
-    csft2data = mocker.patch('csft.__main__.csft2data', return_value=obj)
+def test_arg_top(data, mocker, capsys):
+    csft2data = mocker.patch('csft.__main__.csft2data', return_value=data)
+    head = mocker.patch.object(data, 'head', return_value=data)
 
     assert 0 == main.main(argv=[curdir, '--top', '5'])
+
     csft2data.assert_called_once_with(main._dir(curdir))
-    assert expect == capsys.readouterr()[0].strip()
+    head.assert_called_once()
+    out, err = capsys.readouterr()
+    assert out
+    assert not err
+
+
+@mark.parametrize('top', ['not-a-number', '-1'])
+def test_arg_top_err(top, mocker, capsys):
+    csft2data = mocker.patch('csft.__main__.csft2data')
 
     with raises(SystemExit):
-        main.main(argv=[curdir, '--top', 'not-a-number'])
-    with raises(SystemExit):
-        main.main(argv=[curdir, '--top', '-1'])
+        main.main(argv=[curdir, '--top', top])
+
+    csft2data.assert_not_called()
+    out, err = capsys.readouterr()
+    assert not out
+    assert err
+
+
+def test_arg_with_raw(data, mocker, capsys):
+    csft2data = mocker.patch('csft.__main__.csft2data', return_value=data)
+
+    assert 0 == main.main(argv=[curdir, '--with-raw'])
+
+    csft2data.assert_called_once_with(main._dir(curdir))
+    out, err = capsys.readouterr()
+    assert out
+    assert not err

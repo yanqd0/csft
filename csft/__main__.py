@@ -5,10 +5,14 @@
 The entry point of csft.
 """
 
+from __future__ import print_function
+
 import sys
 from argparse import ArgumentParser
 from os.path import curdir
 from pathlib import Path
+
+from humanfriendly import format_size
 
 from . import __name__ as _name, __version__ as _version
 from ._csft import column, csft2data
@@ -35,28 +39,10 @@ def _parse_args(argv):
     parser.add_argument('path', type=_dir, help='the directory to be analyzed')
     parser.add_argument('--top', type=_positive_int, metavar='N',
                         help='only display top N results')
-    parser.add_argument('-p', '--pretty', action='store_true',
-                        help='print size with units')
+    parser.add_argument('--with-raw', action='store_true',
+                        help='print raw size without units')
 
     return parser.parse_args(args=argv)
-
-
-def pretty_byte(byte):
-    """
-    Convert raw bytes to a value with an appropriate unit.
-
-    :param byte: The number of bytes to be convert.
-    :return: A value with an appropriate unit.
-    """
-    if byte < 0:
-        raise ValueError('%s is not positive!', byte)
-
-    units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB']
-    index = 0
-    for index, _ in enumerate(units):
-        if byte >> (10 * (index + 1)) <= 0:
-            break
-    return '%d %s' % (byte / (1024 ** index), units[index])
 
 
 def main(argv=None):
@@ -71,10 +57,10 @@ def main(argv=None):
 
     if args.top:
         data = data.head(args.top)
+    if args.with_raw:
+        data['raw'] = data[column.SIZE]
 
-    if args.pretty:
-        data[column.SIZE] = data[column.SIZE].map(pretty_byte)
-
+    data[column.SIZE] = data[column.SIZE].map(format_size)
     print(data)
     return 0
 

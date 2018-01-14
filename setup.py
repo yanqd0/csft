@@ -10,6 +10,7 @@ import csft
 
 REQUIRES = [
     'pandas >= 0.20.3',
+    'humanfriendly >= 4.6',
 ]
 
 if VER < '3.4':
