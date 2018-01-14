@@ -79,13 +79,13 @@ def test_sum_data_by_type():
 
 
 def test_sort_data_frame():
-    oredered = OrderedDict()
-    oredered[column.TYPE] = ('a', 'b', 'c')
-    oredered[column.SIZE] = (111, 222, 333)
-    test = DataFrame(oredered)
-    oredered[column.TYPE] = ('c', 'b', 'a')
-    oredered[column.SIZE] = (333, 222, 111)
-    expect = DataFrame(oredered)
+    ordered = OrderedDict()
+    ordered[column.TYPE] = ('a', 'b', 'c')
+    ordered[column.SIZE] = (111, 222, 333)
+    test = DataFrame(ordered)
+    ordered[column.TYPE] = ('c', 'b', 'a')
+    ordered[column.SIZE] = (333, 222, 111)
+    expect = DataFrame(ordered)
     backup = test.copy()
 
     assert all(expect == _csft.sort_data_frame(data=test, by=column.TYPE))
