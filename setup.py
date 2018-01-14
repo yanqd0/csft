@@ -22,7 +22,7 @@ if version < '3.5':
 
 setup(
     name=csft.__name__,
-    version=csft.__version__,
+    use_scm_version=True,
     description='Count Sizes of File Types',
     url=csft.__url__,
     author=csft.__author__,
@@ -40,6 +40,7 @@ setup(
     install_requires=REQUIRES,
     setup_requires=[
         'pytest-runner',
+        'setuptools_scm',
     ],
     tests_require=[
         'pytest',

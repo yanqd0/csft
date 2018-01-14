@@ -9,3 +9,4 @@ pytest-flakes
 pytest-runner
 pytest-mock
 mock
+setuptools_scm
