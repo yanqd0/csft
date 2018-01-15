@@ -55,26 +55,42 @@ Usage
 
 The simplest usage::
 
-    csft PATH/TO/YOUR/PROJECT
+    csft PATH/TO/A/DIRECTORY
 
 More Usage::
 
     csft -h
 
-Result
-------
+CLI Results
+-----------
 
 Something like this::
 
-           type   size
-    0            32859
-    1   .sample  15321
-    2      .xml  12349
-    3      .pyc   7100
-    4       .py   4221
-    5      .yml   1085
-    6      .rst    638
-    7      .iml    455
-    8        .2     41
-    9        .1     41
-    10       .0     41
+    $ csft
+            type       size
+    0      .pack  116.11 MB
+    1        .js   12.64 MB
+    2      .json    6.68 MB
+    3       .png    1.89 MB
+    4      .html    1.57 MB
+    5       .idx  974.77 KB
+    6       .css  140.81 KB
+    7              78.33 KB
+    8      .gexf   51.33 KB
+    9    .sample   15.32 KB
+    10       .md   10.54 KB
+    11  .LICENSE    1.06 KB
+    12       .sh  292 bytes
+
+Use as a Python module
+----------------------
+
+>>> from csft import csft2data
+>>> data = csft2data('.')
+>>> from pandas import DataFrame, Series
+>>> isinstance(data, DataFrame)
+True
+>>> isinstance(data['size'], Series)
+True
+>>> isinstance(data['type'], Series)
+True

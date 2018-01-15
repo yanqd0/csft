@@ -16,20 +16,20 @@ if version < '3.4':
     REQUIRES.append('pathlib >= 1.0.1')
 
 if version < '3.5':
-    REQUIRES[0] = 'pandas >= 0.20.3, < 0.22',
+    REQUIRES[0] = 'pandas >= 0.20.3, < 0.22'
     REQUIRES.append('scandir >= 1.5')
 
-info = runpy.run_path('csft/_meta.py')
+INFO = runpy.run_path('csft/_meta.py')
 
 setup(
     name='csft',
     description='Count Sizes of File Types',
     use_scm_version=True,
 
-    url=info['__url__'],
-    author=info['__author__'],
-    author_email=info['__email__'],
-    license=info['__license__'],
+    url=INFO['__url__'],
+    author=INFO['__author__'],
+    author_email=INFO['__email__'],
+    license=INFO['__license__'],
 
     packages=find_packages(),
     entry_points={
@@ -54,11 +54,16 @@ setup(
     ],
 
     zip_safe=False,
+    keywords=['CLI'],
+    platforms=['any'],
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 3 - Alpha',
         'Environment :: Console',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
+        'Operating System :: MacOS :: MacOS X',
+        'Operating System :: Microsoft :: Windows',
+        'Operating System :: POSIX :: Linux',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
