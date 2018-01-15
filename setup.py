@@ -19,7 +19,7 @@ if version < '3.5':
     REQUIRES[0] = 'pandas >= 0.20.3, < 0.22',
     REQUIRES.append('scandir >= 1.5')
 
-info = runpy.run_path('csft/__init__.py', run_name='setup')
+info = runpy.run_path('csft/_meta.py')
 
 setup(
     name='csft',
