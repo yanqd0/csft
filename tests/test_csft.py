@@ -19,7 +19,7 @@ def tempdir(tmpdir):
     from shutil import copy, copytree
     tmpdir = str(tmpdir)
 
-    copytree('csft', join(tmpdir, 'csft'))
+    copytree('src', join(tmpdir, 'src'))
     copy('LICENSE', tmpdir)
     copy('requirements.txt', tmpdir)
     return tmpdir

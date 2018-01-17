@@ -19,7 +19,7 @@ if version < '3.5':
     REQUIRES[0] = 'pandas >= 0.20.3, < 0.22'
     REQUIRES.append('scandir >= 1.5')
 
-INFO = runpy.run_path('csft/_meta.py')
+INFO = runpy.run_path('src/csft/_meta.py')
 
 setup(
     name='csft',
@@ -32,7 +32,8 @@ setup(
     use_scm_version=True,
     zip_safe=False,
 
-    packages=find_packages(),
+    packages=find_packages('src'),
+    package_dir={'': 'src'},
     entry_points={
         'console_scripts': (
             'csft = csft.__main__:main',

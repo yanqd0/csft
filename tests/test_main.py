@@ -26,12 +26,12 @@ def data():
 
 
 def test_call(null):
-    check_call(['python', '-m', 'csft', 'csft'], stdout=null, stderr=null)
+    check_call(['python', '-m', 'csft', 'src'], stdout=null, stderr=null)
 
 
-@mark.parametrize('argv', [None, [], [''], ['csft'], ])
+@mark.parametrize('argv', [None, [], [''], ['src'], ])
 def test_main(argv, data, mocker, capsys):
-    mocker.patch('sys.argv', ['csft'])
+    mocker.patch('sys.argv', ['src'])
     csft2data = mocker.patch('csft.__main__.csft2data', return_value=data)
 
     assert 0 == main.main(argv=argv)
