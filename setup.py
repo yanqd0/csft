@@ -24,12 +24,13 @@ INFO = runpy.run_path('csft/_meta.py')
 setup(
     name='csft',
     description='Count Sizes of File Types',
-    use_scm_version=True,
-
     url=INFO['__url__'],
     author=INFO['__author__'],
     author_email=INFO['__email__'],
     license=INFO['__license__'],
+
+    use_scm_version=True,
+    zip_safe=False,
 
     packages=find_packages(),
     entry_points={
@@ -53,7 +54,6 @@ setup(
         'mock',
     ],
 
-    zip_safe=False,
     keywords=['CLI'],
     platforms=['any'],
     classifiers=[
@@ -65,7 +65,6 @@ setup(
         'Operating System :: Microsoft :: Windows',
         'Operating System :: POSIX :: Linux',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
