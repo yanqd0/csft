@@ -1,14 +1,14 @@
 # -*- coding:utf-8 -*-
 
 import sys
+from distutils.version import LooseVersion
 from os.path import curdir, devnull
 from subprocess import check_call
 
-from pandas import DataFrame
-from pytest import fixture, mark, raises
-
 from csft import __main__ as main
 from csft._csft import column
+from pandas import DataFrame
+from pytest import fixture, mark, raises
 
 
 @fixture
@@ -62,11 +62,12 @@ def test_show_version(capsys):
         assert 0 == err.code
 
     from csft import __version__
-    if sys.version < '3.0':
+    if LooseVersion(sys.version) < LooseVersion('3.0'):
         _, out = capsys.readouterr()
     else:
         out, _ = capsys.readouterr()
     assert __version__ == out.strip()
+    assert LooseVersion(__version__) == LooseVersion(out.strip())
 
 
 def test_arg_top(data, mocker, capsys):

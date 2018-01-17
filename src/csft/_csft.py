@@ -6,12 +6,13 @@ The implementations of csft.
 
 import sys
 from collections import OrderedDict, namedtuple
+from distutils.version import LooseVersion
 from os.path import getsize, islink, join, split, splitext
 from pathlib import Path
 
 from pandas import DataFrame, Series
 
-if sys.version < '3.5':
+if LooseVersion(sys.version) < LooseVersion('3.5'):
     from scandir import walk
 else:
     from os import walk

@@ -2,7 +2,8 @@
 # -*- coding:utf-8 -*-
 
 """ Setup script for csft """
-import runpy
+from distutils.version import LooseVersion
+from runpy import run_path
 from sys import version
 
 from setuptools import find_packages, setup
@@ -11,15 +12,14 @@ REQUIRES = [
     'pandas >= 0.20.3',
     'humanfriendly >= 4.6',
 ]
-
-if version < '3.4':
+SYS_VERSION = LooseVersion(version)
+if SYS_VERSION < LooseVersion('3.4'):
     REQUIRES.append('pathlib >= 1.0.1')
-
-if version < '3.5':
+if SYS_VERSION < LooseVersion('3.5'):
     REQUIRES[0] = 'pandas >= 0.20.3, < 0.22'
     REQUIRES.append('scandir >= 1.5')
 
-INFO = runpy.run_path('src/csft/_meta.py')
+INFO = run_path('src/csft/_meta.py')
 
 setup(
     name='csft',
