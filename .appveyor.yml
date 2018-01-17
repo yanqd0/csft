@@ -18,9 +18,3 @@ build: off
 
 test_script:
   - "%PYTHON%\\python.exe -m pytest"
-
-notifications:
-  - provider: Email
-    to:
-      - yanqd0@outlook.com
-    on_build_status_changed: true
