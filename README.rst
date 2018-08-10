@@ -1,3 +1,5 @@
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fyanqd0%2Fcsft.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fyanqd0%2Fcsft?ref=badge_shield)
+
 csft - Count Sizes of File Types
 ================================
 
@@ -94,3 +96,6 @@ True
 True
 >>> isinstance(data['type'], Series)
 True
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fyanqd0%2Fcsft.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fyanqd0%2Fcsft?ref=badge_large)
