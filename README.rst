@@ -16,6 +16,9 @@ csft - Count Sizes of File Types
 .. image:: https://img.shields.io/github/license/yanqd0/csft.svg
    :target: https://github.com/yanqd0/csft/blob/master/LICENSE
    :alt: License
+.. image:: https://app.fossa.io/api/projects/git%2Bgithub.com%2Fyanqd0%2Fcsft.svg?type=shield
+   :target: https://app.fossa.io/projects/git%2Bgithub.com%2Fyanqd0%2Fcsft?ref=badge_shield
+   :alt: FOSSA
 
 A CLI to count sizes of file types in a directory, implemented by Python.
 
