@@ -4,10 +4,6 @@ language: python
 
 cache: pip
 
-os:
-  - linux
-  - osx
-
 python:
   - "2.7"
   - "3.4"
@@ -15,10 +11,11 @@ python:
   - "3.6"
 
 install:
-  - pip install -U . -r requirements.txt
   - pip install codecov
+  - pip install -U -r requirements.txt
 
 script:
+  - pip install .
   - pytest
 
 after_success:
