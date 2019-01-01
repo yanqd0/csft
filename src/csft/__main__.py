@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-
 """
 The entry point of csft.
 """
@@ -14,7 +13,8 @@ from pathlib import Path
 
 from humanfriendly import format_size
 
-from . import __name__ as _name, __version__ as _version
+from . import __name__ as _name
+from . import __version__ as _version
 from ._csft import column, csft2data
 
 
@@ -37,10 +37,17 @@ def _parse_args(argv):
     parser = ArgumentParser(prog=_name)
     parser.add_argument('-V', '--version', action='version', version=_version)
     parser.add_argument('path', type=_dir, help='the directory to be analyzed')
-    parser.add_argument('--top', type=_positive_int, metavar='N',
-                        help='only display top N results')
-    parser.add_argument('--with-raw', action='store_true',
-                        help='print raw size without units')
+    parser.add_argument(
+        '--top',
+        type=_positive_int,
+        metavar='N',
+        help='only display top N results',
+    )
+    parser.add_argument(
+        '--with-raw',
+        action='store_true',
+        help='print raw size without units',
+    )
 
     return parser.parse_args(args=argv)
 

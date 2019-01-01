@@ -5,10 +5,11 @@ from distutils.version import LooseVersion
 from os.path import curdir, devnull
 from subprocess import check_call
 
-from csft import __main__ as main
-from csft._csft import column
 from pandas import DataFrame
 from pytest import fixture, mark, raises
+
+from csft import __main__ as main
+from csft._csft import column
 
 
 @fixture
@@ -29,7 +30,12 @@ def test_call(null):
     check_call(['python', '-m', 'csft', 'src'], stdout=null, stderr=null)
 
 
-@mark.parametrize('argv', [None, [], [''], ['src'], ])
+@mark.parametrize('argv', [
+    None,
+    [],
+    [''],
+    ['src'],
+])
 def test_main(argv, data, mocker, capsys):
     mocker.patch('sys.argv', ['src'])
     csft2data = mocker.patch('csft.__main__.csft2data', return_value=data)

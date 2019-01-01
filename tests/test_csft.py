@@ -1,4 +1,3 @@
-# -*- coding:utf-8 -*-
 from collections import Iterable, OrderedDict
 from os.path import dirname, isfile, join
 
@@ -70,10 +69,14 @@ def test_sum_data_by_type():
     assert len(result[column.TYPE]) == len(expect[column.TYPE])
     assert len(result[column.SIZE]) == len(expect[column.SIZE])
     assert all(result[column.TYPE].isin(expect[column.TYPE]))
-    type2size = {t: result[column.SIZE][index]
-                 for index, t in enumerate(result[column.TYPE])}
-    assert all(type2size[t] == expect[column.SIZE][index]
-               for index, t in enumerate(expect[column.TYPE]))
+    type2size = {
+        t: result[column.SIZE][index]
+        for index, t in enumerate(result[column.TYPE])
+    }
+    assert all(
+        type2size[t] == expect[column.SIZE][index]
+        for index, t in enumerate(expect[column.TYPE])
+    )
 
     assert all(test == backup)
 

@@ -8,5 +8,7 @@ pytest-pep8
 pytest-flakes
 pytest-runner
 pytest-mock
+pytest-isort
+pytest-yapf
 mock
 setuptools_scm
