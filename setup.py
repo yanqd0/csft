@@ -50,7 +50,7 @@ setup(
         'pytest-flakes',
         'pytest-mock',
         'pytest-isort',
-        'pytest-yapf',
+        'pytest-yapf3',
         'mock',
     ],
     # PyPI

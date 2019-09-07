@@ -9,6 +9,6 @@ pytest-flakes
 pytest-runner
 pytest-mock
 pytest-isort
-pytest-yapf
+pytest-yapf3
 mock
 setuptools_scm
