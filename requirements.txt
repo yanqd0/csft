@@ -2,13 +2,13 @@ pandas >= 0.20.3
 scandir >= 1.6
 pathlib >= 1.0.1
 humanfriendly >= 4.6
-pytest
-pytest-cov
-pytest-pep8
-pytest-flakes
-pytest-runner
-pytest-mock
-pytest-isort
+pytest==5.2.1
+pytest-cov==2.8.1
+pytest-pep8==1.0.6
+pytest-flakes==4.0.0
+pytest-runner==5.1
+pytest-mock==1.11.1
+pytest-isort==0.3.1
 pytest-yapf3
-mock
-setuptools_scm
+mock==3.0.5
+setuptools_scm==3.3.3
