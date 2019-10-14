@@ -4,7 +4,7 @@ pathlib >= 1.0.1
 humanfriendly >= 4.6
 pytest==5.2.1
 pytest-cov==2.8.1
-pytest-pep8
+pytest-pep8==1.0.6
 pytest-flakes
 pytest-runner
 pytest-mock
