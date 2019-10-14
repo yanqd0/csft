@@ -7,7 +7,7 @@ pytest-cov==2.8.1
 pytest-pep8==1.0.6
 pytest-flakes==4.0.0
 pytest-runner==5.1
-pytest-mock
+pytest-mock==1.11.1
 pytest-isort
 pytest-yapf3
 mock
